@@ -34,5 +34,9 @@
   "contributors": [
     "Andrea Caglio <caglio@intre.it>, Gianni Bombelli (bombo82) <bombo82@giannibombelli.it>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  }
 }
