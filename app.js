@@ -6,17 +6,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 try {
-    var config = require('./config');
+  var config = require('./config');
 } catch (err) {
-    console.log('You don\'t seem to have a configuration file. Create one by copying config.js.template to config.js')
-    process.exit(0);
+  console.log(
+    "You don't seem to have a configuration file. Create one by copying config.js.template to config.js"
+  );
+  process.exit(0);
 }
 // var favicon = require('serve-favicon');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 
-console.log('Exploring git repository located at: ' + config.repo)
+console.log('Exploring git repository located at: ' + config.repo);
 
 var app = express();
 
@@ -38,14 +40,14 @@ app.use('/', index);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
