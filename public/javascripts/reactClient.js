@@ -1,7 +1,7 @@
 window.Gitoscope = {};
 
-$( document ).ready(function() {
-    const GitoscopePage = Gitoscope.Gitoscope;
+$(document).ready(function () {
+  const GitoscopePage = Gitoscope.Gitoscope;
 
-    ReactDOM.render( <GitoscopePage />, document.getElementById('Gitoscope') );
+  ReactDOM.render(<GitoscopePage />, document.getElementById('Gitoscope'));
 });

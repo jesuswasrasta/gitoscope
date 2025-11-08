@@ -1,5 +1,33 @@
+# Dependencies
 node_modules
 npm-debug.log.*
 
+# IDE
 *.iml
 .idea
+.vscode
+
+# Git
+.git
+.gitignore
+
+# Testing
+coverage
+*.test.js
+*.spec.js
+__tests__
+
+# CI/CD
+.github
+
+# Documentation (build from source)
+*.md
+!README.md
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db

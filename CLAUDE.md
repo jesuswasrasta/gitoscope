@@ -16,6 +16,7 @@ Gitoscope is an educational tool that visualizes Git internals. It provides a we
 ## Development Commands
 
 ### Setup
+
 ```bash
 # Copy config template and set repository path
 cp config.js.template config.js
@@ -26,6 +27,7 @@ npm install
 ```
 
 ### Running the Application
+
 ```bash
 # Start server (production mode, port 3000)
 npm run start
@@ -43,6 +45,7 @@ npm run debug
 The application runs on `http://localhost:3000` by default. Port can be changed via `PORT` environment variable.
 
 ### Docker
+
 ```bash
 # Run with internal repository
 docker container run --name gitoscope -p 8080:3000 depsir/gitoscope
@@ -56,11 +59,13 @@ docker container run --name gitoscope -p 8080:3000 -v /path/to/repo:/repo depsir
 ### Core Components
 
 **Configuration** (`config.js`)
+
 - Required before running the application (created from `config.js.template`)
 - Specifies the path to the Git repository to visualize
 - Application exits with error message if config.js is missing
 
 **Git Operations Layer** (`lib/git.js`)
+
 - Central module for all Git operations using NodeGit
 - Opens repository via `getRepo()` which returns a nodegit Repository object
 - Key functions:
@@ -75,6 +80,7 @@ docker container run --name gitoscope -p 8080:3000 -v /path/to/repo:/repo depsir
 - Status building logic distinguishes between working copy, cache (staging), and tree (HEAD) states
 
 **Data Models** (`lib/gitModels.js`)
+
 - Factory functions that transform NodeGit objects into REST API responses
 - `commitFactory()` - Converts commits with parent links and tree references
 - `treeFactory()` - Converts tree objects with entry lists
@@ -83,6 +89,7 @@ docker container run --name gitoscope -p 8080:3000 -v /path/to/repo:/repo depsir
 - Generates REST URLs for navigation (e.g., `/trees/:id`, `/blobs/:id`, `/commits/:id`)
 
 **API Layer**
+
 - `controllers/apiController.js` - Controller functions wrapping git lib operations
 - `routes/api.js` - API route definitions:
   - `/api/status` - File status information
@@ -95,6 +102,7 @@ docker container run --name gitoscope -p 8080:3000 -v /path/to/repo:/repo depsir
   - `/api/references` - All Git references
 
 **Views and Frontend**
+
 - `routes/index.js` - Serves main views (index and internals pages)
 - `views/*.pug` - Pug templates for rendering pages
 - `public/javascripts/reactClient.js` - React-based frontend for interactive visualization

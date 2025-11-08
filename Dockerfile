@@ -1,16 +1,45 @@
+# Build stage
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install all dependencies (including dev dependencies for potential build steps)
+RUN npm ci
+
+# Copy application source
+COPY . .
+
+# Production stage
 FROM node:22-alpine
-EXPOSE 3000
-COPY . /app
+
+WORKDIR /app
+
+# Install git (required for simple-git to work)
 RUN apk update && \
     apk upgrade && \
-    apk add git libgit2-dev krb5-libs && \
-    apk add python tzdata pkgconfig build-base && \
-    mkdir /repo && \
-    git init /repo && \
-    cd /app && \
-    sed  "s/repo: *''/repo: '\/repo'/" config.js.template > config.js && \
-    npm install
-RUN apk del python tzdata pkgconfig build-base && \
+    apk add --no-cache git && \
     rm -rf /tmp/* /var/cache/apk/*
 
-CMD cd /app && npm run start
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --omit=dev && \
+    npm cache clean --force
+
+# Copy application from builder
+COPY --from=builder /app .
+
+# Create and initialize default repository
+RUN mkdir /repo && \
+    git init /repo && \
+    sed "s/repo: *''/repo: '\/repo'/" config.js.template > config.js
+
+# Expose application port
+EXPOSE 3000
+
+# Start application
+CMD ["npm", "run", "start"]
