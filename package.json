@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "pug": "^2.0.4",
     "morgan": "^1.9.1",
-    "nodegit": "^0.26.3",
+    "simple-git": "^3.25.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
