@@ -6,7 +6,9 @@
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www",
     "watchd": "nodemon --inspect ./bin/www",
-    "debug": "node --inspect ./bin/www"
+    "debug": "node --inspect ./bin/www",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
@@ -19,6 +21,7 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
+    "eslint": "^8.57.1",
     "nodemon": "^3.1.9"
   },
   "description": "Gitoscope\r ========",
